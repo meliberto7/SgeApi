@@ -11,13 +11,13 @@ public class Conexao {
     private static final String user = "root";
     private static final String password = "";
     
-    public Connection conectar() {
+    public static Connection conectar() {
         
         Connection conexao = null;
         
         try{
             
-            Class.forName("mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             conexao = DriverManager.getConnection(url, user, password);
             
         }catch(Exception e){

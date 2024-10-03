@@ -1,27 +1,28 @@
-
 package controller;
 
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.bean.Alunos;
+import model.dao.AlunosDAO;
 
 
-@WebServlet(name = "HomeController", urlPatterns = {"/HomeController", "/ola"})
+@WebServlet(name = "HomeController", urlPatterns = {"/HomeController", "/alunos"})
 public class HomeController extends HttpServlet {
 
     Gson conversor = new Gson();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
         
     }
 
@@ -34,14 +35,20 @@ public class HomeController extends HttpServlet {
         
         switch(paginaAtual) {
             
-            case "/ola":
+            case "/alunos":
                 
                 response.setContentType("application/JSON");
                 response.setCharacterEncoding("UTF-8");
                 
-                Map<String, String> res = new HashMap<String, String>();
+                Map<String, List<Alunos>> res = new HashMap<String, List<Alunos>>();
+
+                List<Alunos> list = new ArrayList();
                 
-                res.put("mensagem", "Hello word!");
+                AlunosDAO dao = new AlunosDAO();
+                
+                list = dao.listar();
+                
+                res.put("alunos", list);
                 
                 PrintWriter out = response.getWriter();
                 
@@ -49,7 +56,8 @@ public class HomeController extends HttpServlet {
                 out.flush();
                 
                 break;
-            
+           
+                
         }
         
     }

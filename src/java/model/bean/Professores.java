@@ -6,20 +6,22 @@ import java.util.Date;
 
 public class Professores {
     
-    private int id_professor, id_area;
-    private String nome, matricula, senha, cpf, imagem;
+    private int id_professor, fk_id_area;
+    private String nome, matricula, senha, email, imagem;
     private Date admissao;
 
     public Professores() {
     }
 
-    public Professores(int id_professor, int id_area, String nome, String matricula, String senha, String cpf, String imagem, Date admissao) {
+    
+    
+    public Professores(int id_professor, int fk_id_area, String nome, String matricula, String senha, String email, String imagem, Date admissao) {
         this.id_professor = id_professor;
-        this.id_area = id_area;
+        this.fk_id_area = fk_id_area;
         this.nome = nome;
         this.matricula = matricula;
         this.senha = senha;
-        this.cpf = cpf;
+        this.email = email;
         this.imagem = imagem;
         this.admissao = admissao;
     }
@@ -32,12 +34,12 @@ public class Professores {
         this.id_professor = id_professor;
     }
 
-    public int getId_area() {
-        return id_area;
+    public int getFk_id_area() {
+        return fk_id_area;
     }
 
-    public void setId_area(int id_area) {
-        this.id_area = id_area;
+    public void setFk_id_area(int fk_id_area) {
+        this.fk_id_area = fk_id_area;
     }
 
     public String getNome() {
@@ -64,12 +66,12 @@ public class Professores {
         this.senha = senha;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getImagem() {
@@ -87,7 +89,6 @@ public class Professores {
     public void setAdmissao(Date admissao) {
         this.admissao = admissao;
     }
-    
     
     
 }
