@@ -26,7 +26,7 @@ public class AlunosDAO {
         try{
             
             Connection conexao = Conexao.conectar();
-            PreparedStatement stmt = conexao.prepareStatement("select notas.nota, notas.fk_id_aluno, notas.id_nota, notas.fk_id_disciplina, alunos.id_aluno, alunos.nome, alunos.sobrenome, alunos.email, alunos.senha, alunos.imagem, areas.nome as area, areas.id_area, areas.descricao, disciplinas.disciplina, disciplinas.id_disciplina, disciplinas.fk_id_area from notas \n" +
+            PreparedStatement stmt = conexao.prepareStatement("select notas.nota, notas.fk_id_aluno, notas.id_nota, notas.fk_id_disciplina, alunos.id_aluno, alunos.nome, alunos.sobrenome, alunos.email, alunos.senha, alunos.imagem, areas.nome as area, areas.id_area, areas.descricao, disciplinas.disciplina, disciplinas.id_disciplina from notas \n" +
             "inner join alunos on notas.fk_id_aluno = alunos.id_aluno\n" +
             "inner join disciplinas on notas.fk_id_disciplina = disciplinas.id_disciplina\n" +
             "inner join areas on disciplinas.fk_id_area = areas.id_area;");
@@ -57,7 +57,6 @@ public class AlunosDAO {
                 areas.setDescricao(rs.getString("descricao"));
                 
                 disciplina.setId_disciplina(rs.getInt("id_disciplina"));
-                disciplina.setFk_id_area(rs.getInt("fk_id_area"));
                 disciplina.setDisciplina(rs.getString("disciplina"));
                 
                 list2.add(notas);

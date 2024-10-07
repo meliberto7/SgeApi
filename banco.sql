@@ -166,11 +166,12 @@ CREATE TABLE `professores` (
   `matricula` varchar(10) NOT NULL,
   `admissao` date NOT NULL,
   `senha` varchar(45) NOT NULL,
-  `fk_id_area` int(11) NOT NULL,
   `imagem` varchar(255) DEFAULT NULL,
   `email` varchar(200) NOT NULL,
+  `fk_id_disciplina` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_professor`),
-  KEY `area_id_idx` (`fk_id_area`)
+  KEY `fk_id_disciplina` (`fk_id_disciplina`),
+  CONSTRAINT `professores_ibfk_1` FOREIGN KEY (`fk_id_disciplina`) REFERENCES `disciplinas` (`id_disciplina`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -180,7 +181,7 @@ CREATE TABLE `professores` (
 
 LOCK TABLES `professores` WRITE;
 /*!40000 ALTER TABLE `professores` DISABLE KEYS */;
-INSERT INTO `professores` VALUES (15,'Bertin','204','2024-09-10','00',2,'assets/fotoPerfil.jpg',''),(18,'Leo','514','1111-03-12','123',2,'assets/OIP.jpg',''),(19,'Robertin','668','2024-09-24','00',4,'assets/OIP (1).jpg',''),(20,'gu','867','2024-09-17',' ',2,NULL,''),(21,'iago','492','2024-09-03',' ',3,NULL,'');
+INSERT INTO `professores` VALUES (15,'Bertin','204','2024-09-10','00','assets/fotoPerfil.jpg','',NULL),(18,'Leo','514','1111-03-12','123','assets/OIP.jpg','',NULL),(19,'Robertin','668','2024-09-24','00','assets/OIP (1).jpg','',NULL),(20,'gu','867','2024-09-17',' ',NULL,'',NULL),(21,'iago','492','2024-09-03',' ',NULL,'',NULL);
 /*!40000 ALTER TABLE `professores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,4 +230,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-03 17:31:41
+-- Dump completed on 2024-10-07 17:36:26
