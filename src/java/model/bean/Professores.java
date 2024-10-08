@@ -1,29 +1,26 @@
 package model.bean;
 
-
-import java.util.Date;
-
+import java.util.List;
 
 public class Professores {
     
-    private int id_professor, fk_id_area;
-    private String nome, matricula, senha, email, imagem;
-    private Date admissao;
+    private int id_professor;
+    private String nome, sobrenome, senha, email, imagem;
+    private List<Disciplinas> disciplinas;
 
     public Professores() {
     }
 
     
     
-    public Professores(int id_professor, int fk_id_area, String nome, String matricula, String senha, String email, String imagem, Date admissao) {
+    public Professores(int id_professor, String nome, String sobrenome, String senha, String email, String imagem, List<Disciplinas> disciplinas) {
         this.id_professor = id_professor;
-        this.fk_id_area = fk_id_area;
         this.nome = nome;
-        this.matricula = matricula;
+        this.sobrenome = sobrenome;
         this.senha = senha;
         this.email = email;
         this.imagem = imagem;
-        this.admissao = admissao;
+        this.disciplinas = disciplinas;
     }
 
     public int getId_professor() {
@@ -34,14 +31,6 @@ public class Professores {
         this.id_professor = id_professor;
     }
 
-    public int getFk_id_area() {
-        return fk_id_area;
-    }
-
-    public void setFk_id_area(int fk_id_area) {
-        this.fk_id_area = fk_id_area;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -50,12 +39,12 @@ public class Professores {
         this.nome = nome;
     }
 
-    public String getMatricula() {
-        return matricula;
+    public String getSobrenome() {
+        return sobrenome;
     }
 
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
 
     public String getSenha() {
@@ -82,13 +71,14 @@ public class Professores {
         this.imagem = imagem;
     }
 
-    public Date getAdmissao() {
-        return admissao;
+    public List<Disciplinas> getDisciplinas() {
+        return disciplinas;
     }
 
-    public void setAdmissao(Date admissao) {
-        this.admissao = admissao;
+    public void setDisciplinas(List<Disciplinas> disciplinas) {
+        this.disciplinas = disciplinas;
     }
+    
     
     
 }
