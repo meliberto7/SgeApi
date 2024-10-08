@@ -18,6 +18,32 @@ USE `projeto_sge`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `aluno_turma`
+--
+
+DROP TABLE IF EXISTS `aluno_turma`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `aluno_turma` (
+  `fk_id_aluno` int(11) NOT NULL,
+  `fk_id_turma` int(11) NOT NULL,
+  PRIMARY KEY (`fk_id_aluno`,`fk_id_turma`),
+  KEY `fk_id_turma` (`fk_id_turma`),
+  CONSTRAINT `aluno_turma_ibfk_1` FOREIGN KEY (`fk_id_aluno`) REFERENCES `alunos` (`id_aluno`),
+  CONSTRAINT `aluno_turma_ibfk_2` FOREIGN KEY (`fk_id_turma`) REFERENCES `turmas` (`id_turma`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `aluno_turma`
+--
+
+LOCK TABLES `aluno_turma` WRITE;
+/*!40000 ALTER TABLE `aluno_turma` DISABLE KEYS */;
+/*!40000 ALTER TABLE `aluno_turma` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `alunos`
 --
 
@@ -108,12 +134,11 @@ CREATE TABLE `notas` (
   `id_nota` int(11) NOT NULL AUTO_INCREMENT,
   `nota` float NOT NULL,
   `fk_id_aluno` int(11) NOT NULL,
-  `fk_id_disciplina` int(11) NOT NULL,
+  `fk_id_tarefa` int(11) NOT NULL,
   PRIMARY KEY (`id_nota`),
   KEY `fk_id_aluno` (`fk_id_aluno`),
-  KEY `notas_ibfk_2` (`fk_id_disciplina`),
-  CONSTRAINT `notas_ibfk_1` FOREIGN KEY (`fk_id_aluno`) REFERENCES `alunos` (`id_aluno`),
-  CONSTRAINT `notas_ibfk_2` FOREIGN KEY (`fk_id_disciplina`) REFERENCES `disciplinas` (`id_disciplina`)
+  KEY `fk_id_tarefa` (`fk_id_tarefa`),
+  CONSTRAINT `notas_ibfk_1` FOREIGN KEY (`fk_id_aluno`) REFERENCES `alunos` (`id_aluno`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -123,7 +148,7 @@ CREATE TABLE `notas` (
 
 LOCK TABLES `notas` WRITE;
 /*!40000 ALTER TABLE `notas` DISABLE KEYS */;
-INSERT INTO `notas` VALUES (1,7.5,1,1),(2,7.9,2,2),(3,5.2,3,1),(4,9.9,4,2);
+INSERT INTO `notas` VALUES (1,7.5,1,0),(2,7.9,2,0),(3,5.2,3,0),(4,9.9,4,0);
 /*!40000 ALTER TABLE `notas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,13 +160,15 @@ DROP TABLE IF EXISTS `professor_disciplina`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `professor_disciplina` (
+  `id_professor_disciplina` int(11) NOT NULL AUTO_INCREMENT,
   `fk_id_professor` int(11) NOT NULL,
   `fk_id_disciplina` int(11) NOT NULL,
+  PRIMARY KEY (`id_professor_disciplina`),
   KEY `fk_id_professor` (`fk_id_professor`),
   KEY `fk_id_disciplina` (`fk_id_disciplina`),
   CONSTRAINT `professor_disciplina_ibfk_1` FOREIGN KEY (`fk_id_professor`) REFERENCES `professores` (`id_professor`),
   CONSTRAINT `professor_disciplina_ibfk_2` FOREIGN KEY (`fk_id_disciplina`) REFERENCES `disciplinas` (`id_disciplina`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,6 +177,7 @@ CREATE TABLE `professor_disciplina` (
 
 LOCK TABLES `professor_disciplina` WRITE;
 /*!40000 ALTER TABLE `professor_disciplina` DISABLE KEYS */;
+INSERT INTO `professor_disciplina` VALUES (1,15,2),(2,15,4),(3,18,3),(4,18,1),(5,21,2),(6,21,1),(7,19,1);
 /*!40000 ALTER TABLE `professor_disciplina` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,15 +191,11 @@ DROP TABLE IF EXISTS `professores`;
 CREATE TABLE `professores` (
   `id_professor` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
-  `matricula` varchar(10) NOT NULL,
-  `admissao` date NOT NULL,
+  `sobrenome` varchar(45) DEFAULT NULL,
   `senha` varchar(45) NOT NULL,
-  `imagem` varchar(255) DEFAULT NULL,
   `email` varchar(200) NOT NULL,
-  `fk_id_disciplina` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_professor`),
-  KEY `fk_id_disciplina` (`fk_id_disciplina`),
-  CONSTRAINT `professores_ibfk_1` FOREIGN KEY (`fk_id_disciplina`) REFERENCES `disciplinas` (`id_disciplina`)
+  `imagem` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_professor`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -181,7 +205,7 @@ CREATE TABLE `professores` (
 
 LOCK TABLES `professores` WRITE;
 /*!40000 ALTER TABLE `professores` DISABLE KEYS */;
-INSERT INTO `professores` VALUES (15,'Bertin','204','2024-09-10','00','assets/fotoPerfil.jpg','',NULL),(18,'Leo','514','1111-03-12','123','assets/OIP.jpg','',NULL),(19,'Robertin','668','2024-09-24','00','assets/OIP (1).jpg','',NULL),(20,'gu','867','2024-09-17',' ',NULL,'',NULL),(21,'iago','492','2024-09-03',' ',NULL,'',NULL);
+INSERT INTO `professores` VALUES (15,'Bertin',NULL,'00','','assets/fotoPerfil.jpg'),(18,'Leo',NULL,'123','','assets/OIP.jpg'),(19,'Robertin',NULL,'00','','assets/OIP (1).jpg'),(20,'gu',NULL,' ','',NULL),(21,'iago',NULL,' ','',NULL);
 /*!40000 ALTER TABLE `professores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,12 +219,12 @@ DROP TABLE IF EXISTS `tarefas`;
 CREATE TABLE `tarefas` (
   `id_tarefa` int(11) NOT NULL AUTO_INCREMENT,
   `tarefa` varchar(100) NOT NULL,
-  `descricao` text NOT NULL,
-  `data_entrega` date DEFAULT NULL,
-  `fk_id_disciplina` int(11) NOT NULL,
+  `descricao_tarefa` text NOT NULL,
+  `data_entrega` date NOT NULL,
+  `fk_id_turma` int(11) NOT NULL,
   PRIMARY KEY (`id_tarefa`),
-  KEY `fk_id_disciplina` (`fk_id_disciplina`),
-  CONSTRAINT `tarefas_ibfk_1` FOREIGN KEY (`fk_id_disciplina`) REFERENCES `disciplinas` (`id_disciplina`)
+  KEY `fk_id_turma` (`fk_id_turma`),
+  CONSTRAINT `tarefas_ibfk_1` FOREIGN KEY (`fk_id_turma`) REFERENCES `turmas` (`id_turma`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -211,6 +235,32 @@ CREATE TABLE `tarefas` (
 LOCK TABLES `tarefas` WRITE;
 /*!40000 ALTER TABLE `tarefas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tarefas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `turmas`
+--
+
+DROP TABLE IF EXISTS `turmas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `turmas` (
+  `id_turma` int(11) NOT NULL AUTO_INCREMENT,
+  `turma` varchar(100) DEFAULT NULL,
+  `fk_id_professor_disciplina` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_turma`),
+  KEY `fk_id_professor_disciplina` (`fk_id_professor_disciplina`),
+  CONSTRAINT `turmas_ibfk_1` FOREIGN KEY (`fk_id_professor_disciplina`) REFERENCES `professor_disciplina` (`id_professor_disciplina`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `turmas`
+--
+
+LOCK TABLES `turmas` WRITE;
+/*!40000 ALTER TABLE `turmas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `turmas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -230,4 +280,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-07 17:36:26
+-- Dump completed on 2024-10-08 17:33:13
