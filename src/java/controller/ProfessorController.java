@@ -3,7 +3,6 @@ package controller;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,74 +11,43 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.bean.Alunos;
-import model.bean.Disciplinas;
 import model.bean.Professores;
-import model.dao.AlunosDAO;
-import model.dao.DisciplinasDAO;
 import model.dao.ProfessoresDAO;
 
 
-@WebServlet(name = "HomeController", urlPatterns = {"/HomeController", "/alunos", "/professores"})
-public class HomeController extends HttpServlet {
+@WebServlet(name = "ProfessorController", urlPatterns = {"/ProfessorController", "/professores"})
+public class ProfessorController extends HttpServlet {
 
     Gson conversor = new Gson();
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
     }
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+       
         String paginaAtual = request.getServletPath();
         
         switch(paginaAtual) {
-            
-            case "/alunos":
+                
+                case "/professores":
                 
                 response.setContentType("application/JSON");
                 response.setCharacterEncoding("UTF-8");
-                
-                Map<String, List<Alunos>> res = new HashMap<String, List<Alunos>>();
 
-                List<Alunos> list = new ArrayList();
+                Map<String, List<Professores>> professores = new HashMap<String, List<Professores>>();
                 
-                AlunosDAO dao = new AlunosDAO();
+                ProfessoresDAO daoProf = new ProfessoresDAO();
                 
-                list = dao.listar();
-                
-                res.put("alunos", list);
+                professores.put("professores", daoProf.listar());
                 
                 PrintWriter out = response.getWriter();
                 
-                out.write(conversor.toJson(res));
+                out.write(conversor.toJson(professores));
                 out.flush();
-                
-                break;
-  
-            case "/professores":
-                
-                response.setContentType("application/JSON");
-                response.setCharacterEncoding("UTF-8");
-                
-                Map<String, List<Professores>> res2 = new HashMap<String, List<Professores>>();
-
-                List<Professores> list2 = new ArrayList();
-
-                ProfessoresDAO dao3 = new ProfessoresDAO();
-                
-                list2 = dao3.listar();
-                
-                res2.put("professores", list2);
-                
-                PrintWriter out2 = response.getWriter();
-                
-                out2.write(conversor.toJson(res2));
-                out2.flush();
                 
                 break;
                 
@@ -87,17 +55,14 @@ public class HomeController extends HttpServlet {
         
     }
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       
     }
-
 
     @Override
     public String getServletInfo() {
         return "Short description";
     }
-
 }

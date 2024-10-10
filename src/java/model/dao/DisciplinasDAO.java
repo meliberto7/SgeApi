@@ -66,7 +66,7 @@ public class DisciplinasDAO {
             PreparedStatement stmt = conexao.prepareStatement("SELECT dis.id_disciplina, dis.disciplina, \n" +
             "areas.id_area, areas.nome as nome_area, areas.descricao as descricao_area \n" +
             "FROM disciplinas as dis \n" +
-            "INNER JOIN areas ON dis.fk_id_area = areas.id_area WHERE dis.id_disciplina = ?;");
+            "INNER JOIN areas ON dis.fk_id_area = areas.id_area WHERE dis.id_disciplina = ?");
             
             stmt.setInt(1, id);
             

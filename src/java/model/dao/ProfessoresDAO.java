@@ -17,7 +17,6 @@ public class ProfessoresDAO {
     public List<Professores> listar() {
      
         List<Professores> list = new ArrayList();
-        List<Disciplinas> listDis = new ArrayList();
         List<Integer> listIds = new ArrayList();
         DisciplinasDAO dao = new DisciplinasDAO();
         Prof_DisDAO dao2 = new Prof_DisDAO();
@@ -30,26 +29,27 @@ public class ProfessoresDAO {
             
             while (rs.next()) {
                 
+                List<Disciplinas> listDis = new ArrayList();
                 Professores prof = new Professores();
                 
                 prof.setId_professor(rs.getInt("id_professor"));
                 prof.setNome(rs.getString("nome"));
                 prof.setEmail(rs.getString("email"));
+                prof.setImagem(rs.getString("imagem"));
+                prof.setSobrenome(rs.getString("sobrenome"));
                 
                 listIds = dao2.buscar(prof.getId_professor());
-                
-                Disciplinas dis = new Disciplinas();
-                
+
                 for (int i = 0; i < listIds.size(); i++) {
 
-                    dis = dao.lerDisciplinaEspecifica(listIds.get(i));
-                    
+                    Disciplinas dis = dao.lerDisciplinaEspecifica(listIds.get(i));
+
                     listDis.add(dis);
                     
                 }
-
-                prof.setDisciplinas(listDis);
                 
+                prof.setDisciplinas(listDis);
+
                 list.add(prof);
                 
             }

@@ -1,4 +1,3 @@
-
 package model.bean;
 
 import java.util.List;
@@ -7,48 +6,21 @@ import java.util.List;
 public class Alunos {
     
     private int id_aluno;
-    private String nome, sobrenome, email, senha, imagem;
-    private List<Notas> notas;
-    private List<Areas> areas;
-    private List<Disciplinas> disciplinas;
+    private String nome, sobrenome, email, imagem;
+    private List<Tarefas> tarefas;
+    private Turmas turma;
 
-    public Alunos(int id_aluno, String nome, String sobrenome, String email, String senha, String imagem, List<Notas> notas, List<Areas> areas, List<Disciplinas> disciplinas) {
+    public Alunos() {
+    }
+
+    public Alunos(int id_aluno, String nome, String sobrenome, String email, String imagem, List<Tarefas> tarefas, Turmas turma) {
         this.id_aluno = id_aluno;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
-        this.senha = senha;
         this.imagem = imagem;
-        this.notas = notas;
-        this.areas = areas;
-        this.disciplinas = disciplinas;
-    }
-
-    public List<Areas> getAreas() {
-        return areas;
-    }
-
-    public void setAreas(List<Areas> areas) {
-        this.areas = areas;
-    }
-
-    public List<Disciplinas> getDisciplinas() {
-        return disciplinas;
-    }
-
-    public void setDisciplinas(List<Disciplinas> disciplinas) {
-        this.disciplinas = disciplinas;
-    }
-
-    public List<Notas> getNotas() {
-        return notas;
-    }
-
-    public void setNotas(List<Notas> notas) {
-        this.notas = notas;
-    }
-
-    public Alunos() {
+        this.tarefas = tarefas;
+        this.turma = turma;
     }
 
     public int getId_aluno() {
@@ -83,20 +55,28 @@ public class Alunos {
         this.email = email;
     }
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
     public String getImagem() {
         return imagem;
     }
 
     public void setImagem(String imagem) {
         this.imagem = imagem;
+    }
+
+    public List<Tarefas> getTarefas() {
+        return tarefas;
+    }
+
+    public void setTarefas(List<Tarefas> tarefas) {
+        this.tarefas = tarefas;
+    }
+
+    public Turmas getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turmas turma) {
+        this.turma = turma;
     }
     
     

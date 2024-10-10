@@ -205,7 +205,7 @@ CREATE TABLE `professores` (
 
 LOCK TABLES `professores` WRITE;
 /*!40000 ALTER TABLE `professores` DISABLE KEYS */;
-INSERT INTO `professores` VALUES (15,'Bertin',NULL,'00','','assets/fotoPerfil.jpg'),(18,'Leo',NULL,'123','','assets/OIP.jpg'),(19,'Robertin',NULL,'00','','assets/OIP (1).jpg'),(20,'gu',NULL,' ','',NULL),(21,'iago',NULL,' ','',NULL);
+INSERT INTO `professores` VALUES (15,'Bertin','dos Santos','00','bertin@gmail.com','assets/fotoPerfil.jpg'),(18,'Leo','Amaral','123','leo@gmail.com','assets/OIP.jpg'),(19,'Robertin','Barbosa','00','robertin@gmail.com','assets/OIP (1).jpg'),(20,'gu','Corte',' ','gusta@gmail.com',NULL),(21,'iago','Lima',' ','obrabodasaulas@gmail.com',NULL);
 /*!40000 ALTER TABLE `professores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -280,4 +280,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-08 17:33:13
+-- Dump completed on 2024-10-10 16:36:56

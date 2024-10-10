@@ -19,15 +19,15 @@ public class Prof_DisDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = conexao.prepareStatement("SELECT * FROM professor_disciplina WHERE fk_id_professor = ?");
             stmt.setInt(1, id_prof);
-            
+ 
             ResultSet rs = stmt.executeQuery();
             
-            if (rs.next()) {
+            while (rs.next()) {
                 
                 int id;
-                
+   
                 id = rs.getInt("fk_id_disciplina");
-                
+
                 ids.add(id);
                 
             }

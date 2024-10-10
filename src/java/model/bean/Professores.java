@@ -10,8 +10,7 @@ public class Professores {
 
     public Professores() {
     }
-
-    
+  
     
     public Professores(int id_professor, String nome, String sobrenome, String senha, String email, String imagem, List<Disciplinas> disciplinas) {
         this.id_professor = id_professor;
